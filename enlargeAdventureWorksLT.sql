@@ -1,3 +1,8 @@
+/*
+    Original Script: https://kushagrarakesh.blogspot.com/2018/02/how-to-enlarge-adventureworks2014.html
+    Modified for use with the AdventureWorksLT sample database.
+*/
+
 USE AdventureWorksLT;
 
 -- Creates a sequential Numbers table if one does not exist
@@ -15,7 +20,7 @@ WHERE
         NUMBER INT NOT NULL PRIMARY KEY
     );
 
-    DECLARE @i INT = 0, @j INT = 0, @k INT = 100;
+    DECLARE @i INT = 0, @j INT = 0, @k INT = 1000;
     SET NOCOUNT ON;
 
     BEGIN TRANSACTION
@@ -241,7 +246,7 @@ GO
 BEGIN TRANSACTION
 DECLARE @TableVar TABLE (OrigSalesOrderID int,
     NewSalesOrderID int);
-DECLARE @TotalRecords INT = 100, @TotalResults INT = (SELECT MAX(number) + 1
+DECLARE @TotalRecords INT = 10, @TotalResults INT = (SELECT MAX(number) + 1
 FROM Numbers);
 INSERT INTO
     SalesLT.SalesOrderHeaderEnlarged
@@ -293,7 +298,7 @@ FROM
         number
     FROM
         (
-                                                                    SELECT
+            SELECT
                 TOP (@TotalRecords)
                 number
             FROM
